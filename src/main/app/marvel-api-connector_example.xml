@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:marvel-api="http://www.mulesoft.org/schema/mule/marvel-api" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/marvel-api http://www.mulesoft.org/schema/mule/marvel-api/current/mule-marvel-api.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <marvel-api:config name="Marvel_API__Configuration" privateKey="your_marvel_private_key" publicKey="your_marvel_public_key" doc:name="Marvel API: Configuration"/>
+    <flow name="getCharacters" initialState="started">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/characters" doc:name="HTTP"/>
+        <marvel-api:get-characters config-ref="Marvel_API__Configuration" doc:name="characters"/>
+    </flow>
+    <flow name="getComics" initialState="started">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/comics" doc:name="HTTP"/>
+        <marvel-api:get-comics config-ref="Marvel_API__Configuration" doc:name="comics"/>
+    </flow>
+    <flow name="getCreators" initialState="started">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/creators" doc:name="HTTP"/>
+        <marvel-api:get-creators config-ref="Marvel_API__Configuration" doc:name="creators"/>
+    </flow>
+    <flow name="getEvents" initialState="started">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/events" doc:name="HTTP"/>
+        <marvel-api:get-events config-ref="Marvel_API__Configuration" doc:name="events"/>
+    </flow>
+    <flow name="getSeries" initialState="started">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/series" doc:name="HTTP"/>
+        <marvel-api:get-series config-ref="Marvel_API__Configuration" doc:name="series"/>
+    </flow>
+    <flow name="getStories" initialState="started">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/stories" doc:name="HTTP"/>
+        <marvel-api:get-stories config-ref="Marvel_API__Configuration" doc:name="stories"/>
+    </flow>
+</mule>
